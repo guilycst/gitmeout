@@ -8,14 +8,13 @@
 [![Go Version](https://img.shields.io/badge/Go-1.26-00ADD8?logo=go)](https://go.dev/)
 
 **Container Images:**
+
 [![GHCR](https://img.shields.io/badge/ghcr.io-guilycst/gitmeout-blue)](https://github.com/guilycst/gitmeout/pkgs/container/gitmeout)
 [![Forgejo](https://img.shields.io/badge/code.decastro.me-guilherme/gitmeout-blue)](https://code.decastro.me/guilherme/-/packages/container/gitmeout)
 
 > Mirror GitHub repositories to Forgejo/Codeberg instances
 
 A fast, reliable CLI tool for mirroring repositories from GitHub to Forgejo/Codeberg. Supports both push and pull mirror modes, with flexible filtering and container-ready deployment.
-
-**Topics:** `github` `forgejo` `codeberg` `mirror` `backup` `git` `golang` `cli` `kubernetes` `docker`
 
 ## Features
 
