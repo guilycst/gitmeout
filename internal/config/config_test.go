@@ -42,8 +42,12 @@ func TestExpandEnvVars(t *testing.T) {
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
 			for k, v := range tt.envVars {
-				os.Setenv(k, v)
-				defer os.Unsetenv(k)
+				if err := os.Setenv(k, v); err != nil {
+					t.Fatalf("failed to set env: %v", err)
+				}
+				t.Cleanup(func() {
+					_ = os.Unsetenv(k)
+				})
 			}
 
 			got := expandEnvVars(tt.input)

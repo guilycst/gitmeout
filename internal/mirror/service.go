@@ -204,7 +204,11 @@ func (s *Service) pushMirror(ctx context.Context, target Target, repo Repository
 	if err != nil {
 		return fmt.Errorf("failed to create git client: %w", err)
 	}
-	defer gitClient.Close()
+	defer func() {
+		if err := gitClient.Close(); err != nil {
+			slog.Warn("failed to close git client", "error", err)
+		}
+	}()
 
 	destToken := target.GetAuthToken()
 	if err := gitClient.CloneAndPush(ctx, repo.CloneURL, repo.AuthToken, destURL, destToken, repo.Name); err != nil {
