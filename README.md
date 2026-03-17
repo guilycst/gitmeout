@@ -1,8 +1,14 @@
 # gitmeout
 
+[![Go Report Card](https://goreportcard.com/badge/github.com/guilycst/gitmeout)](https://goreportcard.com/report/github.com/guilycst/gitmeout)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Go Version](https://img.shields.io/badge/Go-1.26-00ADD8?logo=go)](https://go.dev/)
+
 > Mirror GitHub repositories to Forgejo/Codeberg instances
 
-`gitmeout` is a Go CLI tool that reads repositories from a source Git provider (GitHub) and mirrors them to one or more target Forgejo/Codeberg instances. Designed to run periodically via cron or Kubernetes CronJobs.
+A fast, reliable CLI tool for mirroring repositories from GitHub to Forgejo/Codeberg. Supports both push and pull mirror modes, with flexible filtering and container-ready deployment.
+
+**Topics:** `github` `forgejo` `codeberg` `mirror` `backup` `git` `golang` `cli` `kubernetes` `docker`
 
 ## Features
 
@@ -13,6 +19,7 @@
 - **Dual mirror types** - Push mirrors (clone + push) or pull mirrors (Forgejo MigrateRepo API)
 - **Token-only auth** - Secure authentication via Personal Access Tokens
 - **Container-ready** - Docker image and Kubernetes manifests included
+- **Multiarch support** - Linux amd64/arm64 binaries and Docker images
 
 ## ⚠️ Disclaimer
 
