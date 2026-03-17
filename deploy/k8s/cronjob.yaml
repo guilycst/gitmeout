@@ -1,0 +1,42 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: gitmeout
+  labels:
+    app: gitmeout
+spec:
+  schedule: "0 */6 * * *"
+  concurrencyPolicy: Forbid
+  successfulJobsHistoryLimit: 3
+  failedJobsHistoryLimit: 3
+  jobTemplate:
+    spec:
+      template:
+        metadata:
+          labels:
+            app: gitmeout
+        spec:
+          restartPolicy: Never
+          containers:
+            - name: gitmeout
+              image: ghcr.io/guilycst/gitmeout:latest
+              imagePullPolicy: Always
+              volumeMounts:
+                - name: config
+                  mountPath: /app/config.yaml
+                  subPath: config.yaml
+                  readOnly: true
+              envFrom:
+                - secretRef:
+                    name: gitmeout-secrets
+              resources:
+                requests:
+                  memory: "64Mi"
+                  cpu: "50m"
+                limits:
+                  memory: "128Mi"
+                  cpu: "100m"
+          volumes:
+            - name: config
+              secret:
+                secretName: gitmeout-config
