@@ -1,8 +1,15 @@
 # gitmeout
 
+[![CI](https://github.com/guilycst/gitmeout/actions/workflows/ci.yml/badge.svg)](https://github.com/guilycst/gitmeout/actions/workflows/ci.yml)
+[![Release](https://github.com/guilycst/gitmeout/actions/workflows/release.yml/badge.svg)](https://github.com/guilycst/gitmeout/actions/workflows/release.yml)
 [![Go Report Card](https://goreportcard.com/badge/github.com/guilycst/gitmeout)](https://goreportcard.com/report/github.com/guilycst/gitmeout)
+[![GoDoc](https://godoc.org/github.com/guilycst/gitmeout?status.svg)](https://godoc.org/github.com/guilycst/gitmeout)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Go Version](https://img.shields.io/badge/Go-1.26-00ADD8?logo=go)](https://go.dev/)
+
+**Container Images:**
+[![GHCR](https://img.shields.io/badge/ghcr.io-guilycst/gitmeout-blue)](https://github.com/guilycst/gitmeout/pkgs/container/gitmeout)
+[![Forgejo](https://img.shields.io/badge/code.decastro.me-guilherme/gitmeout-blue)](https://code.decastro.me/guilherme/-/packages/container/gitmeout)
 
 > Mirror GitHub repositories to Forgejo/Codeberg instances
 
