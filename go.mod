@@ -1,6 +1,6 @@
 module github.com/guilycst/gitmeout
 
-go 1.25
+go 1.26
 
 require (
 	codeberg.org/mvdkleijn/forgejo-sdk/forgejo/v3 v3.0.0
