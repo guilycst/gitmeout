@@ -46,3 +46,4 @@ config.local.yaml
 # Debug
 debug
 __debug_bin*
+config.yaml
