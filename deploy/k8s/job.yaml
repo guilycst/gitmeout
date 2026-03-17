@@ -1,0 +1,66 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: gitmeout
+  labels:
+    app: gitmeout
+spec:
+  template:
+    metadata:
+      labels:
+        app: gitmeout
+    spec:
+      restartPolicy: Never
+      containers:
+        - name: gitmeout
+          image: ghcr.io/guilycst/gitmeout:latest
+          imagePullPolicy: Always
+          volumeMounts:
+            - name: config
+              mountPath: /app/config.yaml
+              subPath: config.yaml
+              readOnly: true
+          envFrom:
+            - secretRef:
+                name: gitmeout-secrets
+          resources:
+            requests:
+              memory: "64Mi"
+              cpu: "50m"
+            limits:
+              memory: "128Mi"
+              cpu: "100m"
+      volumes:
+        - name: config
+          secret:
+            secretName: gitmeout-config
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: gitmeout-secrets
+type: Opaque
+stringData:
+  GITHUB_TOKEN: "your-github-token-here"
+  CODEBERG_TOKEN: "your-codeberg-token-here"
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: gitmeout-config
+type: Opaque
+stringData:
+  config.yaml: |
+    source:
+      type: github
+      token: ${GITHUB_TOKEN}
+      filters:
+        personal: true
+        orgs: []
+        repos: []
+
+    targets:
+      - name: codeberg
+        type: forgejo
+        url: https://codeberg.org
+        token: ${CODEBERG_TOKEN}

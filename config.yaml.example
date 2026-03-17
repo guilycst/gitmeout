@@ -1,0 +1,13 @@
+source:
+  type: github
+  token: ${GITHUB_TOKEN}
+  filters:
+    personal: true
+    orgs: []
+    repos: []
+
+targets:
+  - name: codeberg
+    type: forgejo
+    url: https://codeberg.org
+    token: ${CODEBERG_TOKEN}
