@@ -10,9 +10,25 @@
 - **Forgejo/Codeberg as targets** - Create mirror repos on any Forgejo instance
 - **Flexible filtering** - Filter by personal repos, orgs, or explicit repo list
 - **Wildcard support** - Use `owner/*` to mirror all repos from an owner
-- **Idempotent** - Skip existing mirrors, only create new ones
+- **Dual mirror types** - Push mirrors (clone + push) or pull mirrors (Forgejo MigrateRepo API)
 - **Token-only auth** - Secure authentication via Personal Access Tokens
 - **Container-ready** - Docker image and Kubernetes manifests included
+
+## ⚠️ Disclaimer
+
+**Use this tool responsibly and only for repositories you own or have permission to mirror.**
+
+- **Personal Use**: This tool is designed for mirroring your own repositories or repositories you have explicit permission to mirror.
+- **GitHub ToS**: Ensure your usage complies with [GitHub's Terms of Service](https://docs.github.com/en/site-policy/github-terms/github-terms-of-service), including API rate limits and acceptable use policies.
+- **Rate Limits**: GitHub's API has rate limits (5,000 authenticated requests/hour). Be mindful when mirroring large numbers of repositories.
+- **Data Portability**: GitHub's ToS supports user data portability for your own content.
+- **No Warranty**: This software is provided "as is" without warranty of any kind. The authors are not responsible for any issues arising from its use.
+
+By using this tool, you agree to:
+- Only mirror repositories you own or have permission to mirror
+- Comply with GitHub's API Terms of Service
+- Respect rate limits and not abuse the API
+- Use it for legitimate data portability purposes
 
 ## Quick Start
 
@@ -81,6 +97,20 @@ docker run --rm \
 | `type` | string | Yes | Provider type. Currently only `forgejo` |
 | `url` | string | Yes | Base URL of the Forgejo instance |
 | `token` | string | Yes | Forgejo Personal Access Token. Use `${VAR}` for env vars |
+| `mirror_type` | string | No | `push` (default) or `pull` - see Mirror Types below |
+
+### Mirror Types
+
+**Push Mirrors** (`mirror_type: push`):
+- Clones the repository from GitHub, then pushes `--mirror` to the target
+- Syncs every run - changes on source are pushed to target
+- Use for: Codeberg (pull mirrors disabled by admin)
+
+**Pull Mirrors** (`mirror_type: pull`):
+- Uses Forgejo's MigrateRepo API to create a pull mirror
+- Forgejo periodically fetches changes from the source automatically
+- Use for: Self-hosted Forgejo instances where pull mirrors are enabled
+- Skips if a mirror already exists
 
 ### Environment Variable Interpolation
 
